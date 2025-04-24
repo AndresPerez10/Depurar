@@ -10,10 +10,11 @@ public class GestorEstudiantes {
         for (int i = 0; i < estudiante.getNotas().length; i++) { // Error: índice fuera de rango
             suma += estudiante.getNotas()[i];
         }
+            double media = suma / estudiante.getNotas().length;
             if (estudiante.getNotas().length == 0) {
-                return 0;
+                media = 0;
             }
-                return suma / estudiante.getNotas().length; // Error si el array está vacío
+                return media; // Error si el array está vacío
 
     }
 
@@ -22,6 +23,14 @@ public class GestorEstudiantes {
         Estudiante mejor = null;
         double mejorNota = -1;
 
+        try {
+            if (estudiantes.length == 0) {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Array Vacio");
+            return new Estudiante("", 0, new double[]{});
+        }
         for (Estudiante estudiante : estudiantes) {
             double media = calcularNotaMedia(estudiante); // Posible fallo aquí
             if (media > mejorNota) {
